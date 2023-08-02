@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import { supabase } from '../client'; // Import the Supabase client
+import { useParams, useNavigate } from 'react-router-dom';
+import { supabase } from  '../client'; 
 
 function EditCreator() {
   const { id } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     url: '',
@@ -46,7 +46,7 @@ function EditCreator() {
       console.error('Error updating creator:', error);
     } else {
       console.log('Creator updated:', data);
-      history.push(`/creators/${id}`);
+      navigate(`/creators/${id}`);
     }
   }
 

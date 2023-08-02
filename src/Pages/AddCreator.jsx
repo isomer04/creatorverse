@@ -1,9 +1,9 @@
 import  { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { supabase } from '../client'; // Import the Supabase client
+import { useNavigate } from 'react-router-dom';
+import { supabase } from  '../client'; 
 
 function AddCreator() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     url: '',
@@ -23,7 +23,7 @@ function AddCreator() {
       console.error('Error adding creator:', error);
     } else {
       console.log('Creator added:', data);
-      history.push('/');
+      navigate('/');
     }
   }
 

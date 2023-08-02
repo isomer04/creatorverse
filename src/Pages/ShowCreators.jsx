@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../client'; // Import the Supabase client
+import { supabase } from '../client'; 
 
 function ShowCreators() {
   const [creators, setCreators] = useState([]);

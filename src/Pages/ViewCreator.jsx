@@ -1,10 +1,12 @@
 import  { useState, useEffect } from 'react';
-import { useParams, Link, useHistory  } from 'react-router-dom';
-import { supabase } from '../client'; // Import the Supabase client
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { supabase } from  '../client'; 
 
 function ViewCreator() {
   const { id } = useParams();
   const [creator, setCreator] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     // Fetch the content creator by ID when the component mounts
@@ -29,7 +31,6 @@ function ViewCreator() {
     return <div>Loading...</div>;
   }
 
-  const history = useHistory();
 
   async function handleDelete() {
     const { data, error } = await supabase.from('creators').delete().eq('id', id);
@@ -38,7 +39,7 @@ function ViewCreator() {
       console.error('Error deleting creator:', error);
     } else {
       console.log('Creator deleted:', data);
-      history.push('/');
+      navigate('/');
     }
   }
 
