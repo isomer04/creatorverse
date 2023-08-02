@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../client'; 
+import { Container, Typography, Link as MUILink, Box } from '@mui/material';
 
 function ShowCreators() {
   const [creators, setCreators] = useState([]);
@@ -20,18 +21,24 @@ function ShowCreators() {
   }, []);
 
   return (
-    <div>
-      <h1>Content Creators</h1>
-      <Link to="/add">Add New Creator</Link>
+    <Container maxWidth="md">
+      <Typography variant="h4" gutterBottom>
+        Content Creators
+      </Typography>
+      <MUILink component={Link} to="/add" color="primary">
+        Add New Creator
+      </MUILink>
       {creators.map((creator) => (
-        <div key={creator.id}>
-          <h2>
-            <Link to={`/creators/${creator.id}`}>{creator.name}</Link>
-          </h2>
-          <p>{creator.description}</p>
-        </div>
+        <Box key={creator.id} mt={3}>
+          <Typography variant="h5">
+            <MUILink component={Link} to={`/creators/${creator.id}`} color="inherit">
+              {creator.name}
+            </MUILink>
+          </Typography>
+          <Typography variant="body1">{creator.description}</Typography>
+        </Box>
       ))}
-    </div>
+    </Container>
   );
 }
 

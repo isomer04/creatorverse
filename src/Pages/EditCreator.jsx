@@ -1,16 +1,20 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { supabase } from  '../client'; 
+import { supabase } from '../client';
+import {
+  Container,
+  Typography,
+  TextField,
+  TextareaAutosize,
+  Button,
+  Box,
+  CircularProgress,
+} from '@mui/material';
 
 function EditCreator() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: '',
-    url: '',
-    description: '',
-    imageURL: '',
-  });
+  const [formData, setFormData] = useState(null);
 
   useEffect(() => {
     // Fetch the content creator by ID when the component mounts
@@ -51,32 +55,64 @@ function EditCreator() {
   }
 
   if (!formData) {
-    return <div>Loading...</div>;
+    return (
+      <Container maxWidth="md" style={{ textAlign: 'center', marginTop: '50px' }}>
+        <CircularProgress />
+      </Container>
+    );
   }
 
   return (
-    <div>
-      <h1>Edit Creator</h1>
+    <Container maxWidth="md">
+      <Typography variant="h4" gutterBottom>
+        Edit Creator
+      </Typography>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
-        </div>
-        <div>
-          <label>URL:</label>
-          <input type="text" name="url" value={formData.url} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea name="description" value={formData.description} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Image URL (Optional):</label>
-          <input type="text" name="imageURL" value={formData.imageURL} onChange={handleChange} />
-        </div>
-        <button type="submit">Update Creator</button>
+        <Box mt={2}>
+          <TextField
+            label="Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
+        <Box mt={2}>
+          <TextField
+            label="URL"
+            name="url"
+            value={formData.url}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
+        <Box mt={2}>
+          <TextareaAutosize
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            rowsMin={4}
+            placeholder="Description"
+            style={{ width: '100%', padding: '8px', border: '1px solid #ccc' }}
+          />
+        </Box>
+        <Box mt={2}>
+          <TextField
+            label="Image URL (Optional)"
+            name="imageURL"
+            value={formData.imageURL}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
+        <Button variant="contained" color="primary" type="submit" mt={2}>
+          Update Creator
+        </Button>
       </form>
-    </div>
+    </Container>
   );
 }
 
