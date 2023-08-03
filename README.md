@@ -34,6 +34,7 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
+![creatorverse](https://github.com/isomer04/creatorverse/assets/43922158/0dcd0fea-219a-492c-88c5-0686a634d2b6)
 
 👉🏿<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
