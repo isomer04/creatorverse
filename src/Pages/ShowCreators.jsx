@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../client'; 
-import { Container, Typography, Link as MUILink, Box } from '@mui/material';
+import { Container, Typography, Button, Box, Grid } from '@mui/material';
 
 function ShowCreators() {
   const [creators, setCreators] = useState([]);
@@ -25,19 +25,28 @@ function ShowCreators() {
       <Typography variant="h4" gutterBottom>
         Content Creators
       </Typography>
-      <MUILink component={Link} to="/add" color="primary">
+      <Button component={Link} to="/add" variant="contained" color="primary">
         Add New Creator
-      </MUILink>
-      {creators.map((creator) => (
-        <Box key={creator.id} mt={3}>
-          <Typography variant="h5">
-            <MUILink component={Link} to={`/creators/${creator.id}`} color="inherit">
-              {creator.name}
-            </MUILink>
-          </Typography>
-          <Typography variant="body1">{creator.description}</Typography>
-        </Box>
-      ))}
+      </Button>
+      <Grid container spacing={2}>
+        {creators.map((creator) => (
+          <Grid key={creator.id} item xs={12} md={6}>
+            <Box mt={3}>
+              <Typography variant="h5">
+                <Link to={`/creators/${creator.id}`} style={{ textDecoration: 'none' }}>
+                  {creator.name}
+                </Link>
+              </Typography>
+              <Typography variant="body1">{creator.description}</Typography>
+              <img
+                src={creator.imageURL}
+                alt={creator.name}
+                style={{ maxWidth: '100%', height: 'auto', marginTop: '10px' }}
+              />
+            </Box>
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 }

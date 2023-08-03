@@ -52,8 +52,13 @@ function ViewCreator() {
         {creator.name}
       </Typography>
       <Typography variant="body1" gutterBottom>
-        {creator.description}
+        Description: {creator.description}
       </Typography>
+      <Typography variant="body1" gutterBottom>
+        URL: {creator.url}
+      </Typography>
+      <img src={creator.imageURL} alt={creator.name} style={{ maxWidth: '100%', height: 'auto' }} />
+
       <Box mt={2}>
         <Button component={Link} to={`/edit/${id}`} variant="outlined" color="primary">
           Edit Creator
